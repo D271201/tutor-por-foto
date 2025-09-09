@@ -1,0 +1,418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="pt-BR"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Tutor por Foto&lt;/title&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Tailwind CSS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Font Awesome for Icons --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Google Fonts --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Estilo para a fonte Inter */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Estilos para a área de upload de imagem */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#image-upload-area {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.2s ease-in-out;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Animação de carregamento */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.loader {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 4px solid #f3f3f3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-top: 4px solid #14b8a6; /* Teal color */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: spin 1s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes spin {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>0% { transform: rotate(0deg); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>100% { transform: rotate(360deg); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Ocultar elementos */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hidden {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Estilo para a imagem de pré-visualização */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#image-preview {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-height: 300px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none; /* Começa escondida */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Estilo para a resposta formatada */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#response-container h3 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.125rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #115e59; /* Darker Teal */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#response-container ul {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>list-style-position: inside;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding-left: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#response-container li {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">         </span>#response-container code {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f3f4f6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0.2rem 0.4rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: monospace;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="bg-gray-100 flex items-center justify-center min-h-screen p-4"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-8"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="text-center mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Espaço para a sua logo --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="https://i.postimg.cc/B6Ws2pM4/image-1.png" alt="Logo" class="mx-auto mb-4 rounded-lg w-32"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1 class="text-2xl md:text-3xl font-bold text-gray-900"&gt;Tutor por Foto&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-gray-500 mt-1"&gt;Envie a foto da sua dúvida e receba a resolução!&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Área de Input --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;label for="image-upload" class="block text-sm font-medium text-gray-700 mb-1"&gt;Envie a imagem da sua dúvida&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="image-upload-area" class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md cursor-pointer hover:border-teal-600 transition-colors"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-1 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;i class="fas fa-image text-4xl text-gray-400"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex text-sm text-gray-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p class="pl-1"&gt;Clique para carregar ou arraste e solte&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-xs text-gray-500"&gt;PNG, JPG, GIF até 10MB&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;input id="image-upload" name="image-upload" type="file" class="sr-only" accept="image/*"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;img id="image-preview" src="" alt="Pré-visualização da imagem"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="submit-button" class="w-full flex items-center justify-center bg-teal-700 text-white font-semibold py-3 px-4 rounded-lg hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-600 transition-all duration-300 disabled:bg-gray-400" disabled&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;i class="fa-solid fa-wand-magic-sparkles mr-2"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Obter Resolução</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Área de Resposta --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="loading-indicator" class="hidden text-center py-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="loader mx-auto"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="mt-4 text-gray-600"&gt;Analisando a imagem e preparando sua resposta...&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="response-area" class="mt-6 hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;div class="bg-gray-50 p-4 rounded-lg prose max-w-none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="response-container"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;div id="similar-question-container" class="mt-4 bg-blue-50 p-4 rounded-lg prose max-w-none hidden"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;div id="similar-resolution-container" class="mt-4 bg-green-50 p-4 rounded-lg prose max-w-none hidden"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;div id="action-buttons" class="mt-4 flex flex-col sm:flex-row gap-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button id="copy-button" class="w-full sm:w-auto flex-grow flex items-center justify-center bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fa-solid fa-copy mr-2"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Copiar Resposta</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button id="new-question-button" class="w-full sm:w-auto flex-grow flex items-center justify-center bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-600 transition-all duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fa-solid fa-plus mr-2"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Nova Pergunta</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button id="generate-similar-button" class="w-full sm:w-auto flex-grow flex items-center justify-center bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fa-solid fa-lightbulb mr-2"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Gerar Questão Semelhante</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;div id="similar-action-buttons" class="mt-4 flex flex-col sm:flex-row gap-2 hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>&lt;button id="show-resolution-button" class="w-full flex items-center justify-center bg-orange-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 transition-all duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fa-solid fa-eye mr-2"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Ver Resolução</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">             </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Elementos do DOM</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const imageUploadArea = document.getElementById('image-upload-area');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const imageUpload = document.getElementById('image-upload');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const imagePreview = document.getElementById('image-preview');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const submitButton = document.getElementById('submit-button');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const loadingIndicator = document.getElementById('loading-indicator');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const responseArea = document.getElementById('response-area');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const responseContainer = document.getElementById('response-container');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const actionButtons = document.getElementById('action-buttons');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const copyButton = document.getElementById('copy-button');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const newQuestionButton = document.getElementById('new-question-button');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const generateSimilarButton = document.getElementById('generate-similar-button');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const similarQuestionContainer = document.getElementById('similar-question-container');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const similarResolutionContainer = document.getElementById('similar-resolution-container');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const similarActionButtons = document.getElementById('similar-action-buttons');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const showResolutionButton = document.getElementById('show-resolution-button');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>let imageBase64 = null;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Lógica para carregar imagem</p>
+<p class="p1"><span class="Apple-converted-space">        </span>imageUploadArea.addEventListener('click', () =&gt; imageUpload.click());</p>
+<p class="p1"><span class="Apple-converted-space">        </span>imageUploadArea.addEventListener('dragover', (event) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>event.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>imageUploadArea.classList.add('border-teal-600', 'bg-teal-50');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>imageUploadArea.addEventListener('dragleave', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>imageUploadArea.classList.remove('border-teal-600', 'bg-teal-50');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>imageUploadArea.addEventListener('drop', (event) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>event.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>imageUploadArea.classList.remove('border-teal-600', 'bg-teal-50');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const files = event.dataTransfer.files;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (files.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>imageUpload.files = files;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>handleImage(files[0]);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>imageUpload.addEventListener('change', (event) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const files = event.target.files;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (files.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>handleImage(files[0]);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function handleImage(file) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (file) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const reader = new FileReader();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>reader.onload = (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>imageBase64 = e.target.result.split(',')[1]; // Pega apenas a parte Base64</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>imagePreview.src = e.target.result;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>imagePreview.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>submitButton.disabled = false;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>};</p>
+<p class="p1"><span class="Apple-converted-space">                </span>reader.readAsDataURL(file);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Função para chamar a API do Gemini</p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function callGeminiAPI(prompt, base64Data) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const apiKey = ""; // A chave da API é gerenciada pelo ambiente</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const payload = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>contents: [{</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>parts: [</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>{ text: prompt },</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>{ inline_data: { mime_type: "image/jpeg", data: base64Data } }</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}],</p>
+<p class="p1"><span class="Apple-converted-space">                </span>generationConfig: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>temperature: 0.4,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>topP: 1,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>topK: 32,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>maxOutputTokens: 4096,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = await fetch(url, {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>method: 'POST',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>headers: { 'Content-Type': 'application/json' },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>body: JSON.stringify(payload)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!response.ok) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>throw new Error(`HTTP error! status: ${response.status}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const result = await response.json();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return result.candidates[0].content.parts[0].text;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error("Erro ao chamar a API:", error);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return "Desculpe, ocorreu um erro ao tentar obter a resposta. Por favor, tente novamente.";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Função para formatar a resposta com Markdown simples</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function formatResponse(text) {</p>
+<p class="p1"><span class="Apple-converted-space">             </span>return text</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.replace(/\*\*\*(.*?)\*\*\*/g, '&lt;h3&gt;$1&lt;/h3&gt;')</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.replace(/\*\*(.*?)\*\*/g, '&lt;strong&gt;$1&lt;/strong&gt;')</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.replace(/\*(.*?)\*/g, '&lt;li&gt;$1&lt;/li&gt;')</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.replace(/^(?!&lt;h|&lt;s|&lt;l|&lt;li&gt;|&lt;ul&gt;)(.*)$/gm, '&lt;p&gt;$1&lt;/p&gt;') // Envolve parágrafos que não são outros elementos</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.replace(/&lt;\/li&gt;\s*&lt;p&gt;/g, '&lt;/li&gt;') // Corrige parágrafos extras após listas</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.replace(/&lt;\/p&gt;\s*&lt;li&gt;/g, '&lt;li&gt;')</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.replace(/&lt;\/li&gt;\s*&lt;li&gt;/g, '&lt;/li&gt;&lt;li&gt;') // Junta listas</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.replace(/(&lt;li&gt;.*&lt;\/li&gt;)/gs, '&lt;ul&gt;$1&lt;/ul&gt;') // Envolve listas em &lt;ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.replace(/&lt;\/ul&gt;\s*&lt;ul&gt;/g, ''); // Remove &lt;ul&gt; duplicados</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Envio do formulário</p>
+<p class="p1"><span class="Apple-converted-space">        </span>submitButton.addEventListener('click', async () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!imageBase64) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Reset UI</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resetResponseUI(false);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingIndicator.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>submitButton.disabled = true;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const prompt = `Você é um tutor de IA didático chamado "Tutor por Foto". Sua missão é fornecer resoluções claras, objetivas e passo a passo para a dúvida do aluno na imagem. Siga ESTRITAMENTE o seguinte formato, usando markdown simples:</p>
+<p class="p2"><br></p>
+<p class="p1">***🎯 O Que a Questão Quer?***</p>
+<p class="p1">* [Resuma em uma frase o objetivo do problema.]</p>
+<p class="p2"><br></p>
+<p class="p1">***🧠 Conceito-Chave***</p>
+<p class="p1">* [Explique de forma simples o principal conceito teórico necessário para resolver a questão.]</p>
+<p class="p2"><br></p>
+<p class="p1">***📝 Resolução Passo a Passo***</p>
+<p class="p1">* [Passo 1: Descreva a primeira etapa do cálculo ou raciocínio.]</p>
+<p class="p1">* [Passo 2: Continue com a próxima etapa.]</p>
+<p class="p1">* [...continue até o final.]</p>
+<p class="p2"><br></p>
+<p class="p1">***✅ Resposta Final***</p>
+<p class="p1">* [Apresente a resposta final de forma clara e destacada.]`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const responseText = await callGeminiAPI(prompt, imageBase64);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const formattedHtml = formatResponse(responseText);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingIndicator.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>responseContainer.innerHTML = formattedHtml;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>responseArea.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Gerar Questão Semelhante</p>
+<p class="p1"><span class="Apple-converted-space">        </span>generateSimilarButton.addEventListener('click', async () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!imageBase64) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingIndicator.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>actionButtons.classList.add('hidden'); // Esconde botões principais</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarQuestionContainer.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarResolutionContainer.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarActionButtons.classList.add('hidden');</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const prompt = `Baseado na imagem original e na sua resolução, crie UMA ÚNICA questão semelhante para que o aluno possa praticar o mesmo conceito. Apresente APENAS a questão, sem a resolução, usando o seguinte formato de markdown:</p>
+<p class="p2"><br></p>
+<p class="p1">***🚀 Desafio para Praticar***</p>
+<p class="p1">* [Enunciado da nova questão aqui.]`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const responseText = await callGeminiAPI(prompt, imageBase64);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const formattedHtml = formatResponse(responseText);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingIndicator.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarQuestionContainer.innerHTML = formattedHtml;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarQuestionContainer.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarActionButtons.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Mostrar Resolução da Questão Semelhante</p>
+<p class="p1"><span class="Apple-converted-space">        </span>showResolutionButton.addEventListener('click', async () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">             </span>if (!imageBase64) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingIndicator.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarActionButtons.classList.add('hidden'); // Esconde botão de ver resolução</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const prompt = `Resolva a ÚLTIMA questão que você gerou (a questão para praticar). Siga EXATAMENTE o mesmo formato didático da resposta original:</p>
+<p class="p2"><br></p>
+<p class="p1">***🎯 O Que a Questão Quer?***</p>
+<p class="p1">* [Resumo]</p>
+<p class="p2"><br></p>
+<p class="p1">***🧠 Conceito-Chave***</p>
+<p class="p1">* [Explicação]</p>
+<p class="p2"><br></p>
+<p class="p1">***📝 Resolução Passo a Passo***</p>
+<p class="p1">* [Passos]</p>
+<p class="p2"><br></p>
+<p class="p1">***✅ Resposta Final***</p>
+<p class="p1">* [Resposta]`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const responseText = await callGeminiAPI(prompt, imageBase64);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const formattedHtml = formatResponse(responseText);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingIndicator.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarResolutionContainer.innerHTML = formattedHtml;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarResolutionContainer.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>actionButtons.classList.remove('hidden'); // Mostra os botões originais novamente</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Ação do botão de copiar</p>
+<p class="p1"><span class="Apple-converted-space">        </span>copyButton.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const textToCopy = responseContainer.innerText + '\n\n' + similarQuestionContainer.innerText + '\n\n' + similarResolutionContainer.innerText;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Técnica de fallback para clipboard</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const textArea = document.createElement('textarea');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>textArea.value = textToCopy;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.body.appendChild(textArea);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>textArea.select();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.execCommand('copy');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>copyButton.innerHTML = '&lt;i class="fa-solid fa-check mr-2"&gt;&lt;/i&gt; Copiado!';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                     </span>copyButton.innerHTML = '&lt;i class="fa-solid fa-copy mr-2"&gt;&lt;/i&gt; Copiar Resposta';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}, 2000);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (err) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error('Falha ao copiar texto: ', err);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.body.removeChild(textArea);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Ação do botão de nova pergunta</p>
+<p class="p1"><span class="Apple-converted-space">        </span>newQuestionButton.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resetResponseUI(true);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function resetResponseUI(fullReset) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>responseArea.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>responseContainer.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarQuestionContainer.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarQuestionContainer.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarResolutionContainer.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarResolutionContainer.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>actionButtons.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>similarActionButtons.classList.add('hidden');</p>
+<p class="p2"><br></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (fullReset) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>imageBase64 = null;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>imagePreview.src = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>imagePreview.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>imageUpload.value = ''; // Limpa o input de arquivo</p>
+<p class="p1"><span class="Apple-converted-space">                </span>submitButton.disabled = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+<p class="p2"><br></p>
+</body>
+</html>
